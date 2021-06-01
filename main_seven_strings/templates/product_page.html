@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- pages-title-start -->
+    <section class="contact-img-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <div class="con-text">
+                                <h2 class="page-title">Single Product</h2>
+                                <p><a href="/">Home</a> | Single Product</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    <!-- pages-title-end -->
+    <!-- single product content section start -->
+    <section class="single-product-area sit">
+            {% for product in products %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 none-si-pro">
+                                    <div class="pro-img-tab-content tab-content">
+                                        <div class="tab-pane active" id="image-1">
+                                            <div class="simpleLens-big-image-container">
+                                                <a class="simpleLens-lens-image" data-lightbox="roadtrip" data-lens-image="{{product.image.url}}" href="{{product.image.url}}">
+                                                    <img src="{{product.image.url}}" alt="" class="simpleLens-big-image">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="image-2">
+                                            <div class="simpleLens-big-image-container">
+                                                <a class="simpleLens-lens-image" data-lightbox="roadtrip" data-lens-image="{{product.image_2.url}}" href="{{product.image_2.url}}">
+                                                    <img src="{{product.image_2.url}}" alt="" class="simpleLens-big-image">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="cras">
+                                        <div class="product-name">
+                                            <h2>{{product.name}}</h2>
+                                        </div>
+                                        <div class="pro-rating cendo-pro">
+{#                                            <p class="rating-links">#}
+{#                                                <a href="#">1 Reviews</a>#}
+{#                                            </p>#}
+                                        </div>
+                                        <p class="availability in-stock">
+                                            Product Code: {{ product.id}}
+                                        </p>
+                                        <p class="availability in-stock2">
+                                            Availability:In stock
+                                        </p>
+                                        <div class="short-description">
+                                            <p>{{ product.description }}</p>
+                                        </div>
+                                        <div class="pre-box">
+                                            <span class="special-price">${{ product.price }}</span>
+                                        </div>
+                                        <div class="add-to-box1">
+                                            <div class="add-to-box add-to-box2">
+                                                <div class="add-to-cart">
+                                                    <div class="product-icon">
+                                                        <a href="{% url "cart:cart_add" product.id %}">
+                                                            <i class="fa fa-shopping-cart"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="s-cart-img">
+                                            <a href="#">
+                                                <img alt="" src="../../static/img/icon-img/screenshot_2.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-xs-12">
+                                    <div class="text">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active">
+                                                <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Product Description</a>
+                                            </li>
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content tab-con2">
+                                            <div role="tabpanel" class="tab-pane active" id="home">{{ product.description }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-3">
+                            <div class="single-sidebar">
+                                <div class="single-sidebar an-shop">
+                                    <h3 class="wg-title">BEST SELLER</h3>
+                                    <ul>
+                                        {% for item in featured %}
+                                            <li class="b-none7">
+                                                <div class="tb-recent-thumbb">
+                                                    <a href="{{ item.get_absolute_url }}">
+                                                        <img class="attachment" src="{{item.image.url}}" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="tb-recentb7">
+                                                    <div class="tb-beg">
+                                                        <a href="{{ item.get_absolute_url }}">{{ item.name}}</a>
+                                                    </div>
+                                                    <div class="tb-product-price font-noraure-3">
+                                                        <span class="amount">${{ item.price }}</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                   </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+            </section>
+{% endblock %}

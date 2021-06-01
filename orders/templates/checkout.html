@@ -1,0 +1,110 @@
+{% extends "base.html"%}
+
+{% block content %}
+    <!-- pages-title-start -->
+    <section class="contact-img-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="con-text">
+                            <h2 class="page-title">Checkout</h2>
+                            <p><a href="/">Home</a> | Checkout</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- pages-title-end -->
+
+    <!-- checkout content section start -->
+    <div class="checkout-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Form -->
+                    <div class="col-md-7 col-sm-12">
+                        <div class="text">
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="home">
+                                    <div class="row">
+                                        <form action="" method="post" class="order-form">
+                                            {% csrf_token %}
+                                            {{ form.as_p }}
+                                            <div class="col-md-12 text-center">
+                                                <p class="checkout-coupon">
+                                                    <input type="submit" value="CONTINUE">
+                                                </p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane" id="message">
+                                    <div class="last-check">
+                                        <h3 class="checkbox9">complete</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Order Summary -->
+                    <div class="col-md-5 col-sm-12">
+                        <div class="ro-checkout-summary">
+                            <div class="ro-title">
+                                <h3 class="checkbox9">ORDER SUMMARY</h3>
+                            </div>
+                            {% for item in cart %}
+                                <div class="ro-body">
+                                    <div class="ro-item">
+                                        <div class="ro-image">
+                                            <a href="{{item.product.get_absolute_url}}">
+                                                <img src="{{ item.product.image.url }}" alt="">
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <div class="tb-beg">
+                                                <a href="{{item.product.get_absolute_url}}">{{item.product.name}}</a>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="ro-price">
+                                                <span class="amount">${{item.product.price}}</span>
+                                            </div>
+                                            <div class="ro-quantity">
+                                                <strong class="product-quantity">× {{ item.quantity }}</strong>
+                                            </div>
+                                            <div class="product-total">
+                                                <span class="amount">${{item.total_price}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="ro-footer">
+                                <div class="order-total">
+                                    <p>
+                                        Total
+                                        <span>
+                                            <strong>
+                                                <span class="amount">${{cart.get_total_price }}</span>
+                                            </strong>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p>
+                                        Payment Due
+                                        <span>
+                                            <strong>
+                                                <span class="amount">${{cart.get_total_price }}</span>
+                                            </strong>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- checkout  content section end -->
+{% endblock %}

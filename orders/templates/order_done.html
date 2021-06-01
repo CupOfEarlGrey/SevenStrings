@@ -1,0 +1,35 @@
+{% extends "base.html"%}
+
+{% block content %}
+    <!-- pages-title-start -->
+    <section class="contact-img-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="con-text">
+                        <h2 class="page-title">Checkout</h2>
+                        <p><a href="/">Home</a> | Checkout</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- pages-title-end -->
+
+    <!-- checkout content section start -->
+    <div class="checkout-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-sm-12">
+                    <div class="text">
+                        <h2 class="checkbox9">Your order successfully complete!</h2>
+                        <h3 class="checkbox9">Order id: <strong>{{ order.id }}</strong></h3>
+                    </div>
+                    <div>
+                        <h5><a href="{% url "main_seven_strings:shop" %}">Back to shop</a> </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

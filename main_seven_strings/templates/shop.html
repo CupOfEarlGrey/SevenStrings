@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- pages-title-start -->
+    <section class="contact-img-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <div class="con-text">
+                                <h2 class="page-title">Shop</h2>
+                                <p><a href="/">Home</a> | shop</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    <!-- pages-title-end -->
+    <!-- shop-style content section start -->
+    <section class="pages products-page section-padding-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-3 col-sm-12">
+                            <div class="all-shop-sidebar">
+                                <div class="top-shop-sidebar">
+                                    <h3 class="wg-title">SHOP BY</h3>
+                                </div>
+                                <form action="{% url "main_seven_strings:shop" %}" method="get">
+                                    <div class="shop-one">
+                                        <h3 class="wg-title2">Categories</h3>
+                                        <ul class="product-categories">
+                                            {% for item in category %}
+                                                <div>
+                                                    <input type="checkbox" class="active" name="category" value="{{item}}">
+                                                    <span>{{ item }}</span>
+                                                </div>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div class="shop-one">
+                                        <h3 class="wg-title2">Brand</h3>
+                                        <ul class="product-categories">
+                                            {% for item in brand %}
+                                                <div>
+                                                    <input type="checkbox" class="active" name="brand" value="{{item.brand}}">
+                                                    <span>{{ item.brand }}</span>
+                                                </div>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+
+                                    <div class="shop-one re-shop-one">
+                                        <h3 class="wg-title2">Choose Price</h3>
+                                        <div class="widget shop-filter">
+                                            <div class="info_widget">
+                                                <div class="price_filter">
+                                                    <div id="slider-range"></div>
+                                                    <div id="amount">
+                                                        <input type="text" name="first_price" value="" class="first_price" />
+                                                        <input type="text" name="last_price" value="" class="last_price"/>
+                                                        <button class="button-shop" type="submit"><i class="fa fa-search search-icon"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit">Search</button>
+                                </form>
+                                <div class="top-shop-sidebar an-shop">
+                                    <h3 class="wg-title">BEST SELLER</h3>
+                                    <ul>
+                                        {% for item in featured %}
+                                           <li class="b-none">
+                                                <div class="tb-recent-thumbb">
+                                                    <a href="{{ item.get_absolute_url }}">
+                                                        <img class="attachment" src="{{ item.image.url }}" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="tb-recentb">
+                                                    <div class="tb-beg">
+                                                        <a href="{{ item.get_absolute_url }}">{{ item.name}}</a>
+                                                    </div>
+                                                    <div class="tb-product-price font-noraure-3">
+                                                        <span class="amount">${{ item.price }}</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                   </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-lg-9 col-sm-12">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="features-tab">
+                                      <!-- Nav tabs -->
+                                        <div class="shop-all-tab">
+                                            <div class="two-part">
+                                                <ul class="nav tabs" role="tablist">
+                                                    <li class="vali">View as:</li>
+                                                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-th-large"></i></a></li>
+                                                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-align-justify"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                      <!-- Tab panes -->
+                                        {% if search_result %}
+                                                <div class="tab-content">
+                                                <div role="tabpanel" class="tab-pane active" id="home">
+                                                <div class="row">
+                                                    <div class="shop-tab">
+                                                        <!-- single-product start -->
+                                                        {% for product in search_result %}
+                                                            <div class="col-md-4 col-lg-4 col-sm-6">
+                                                                <div class="single-product">
+                                                                    <div class="product-img">
+                                                                        <div class="pro-type">
+                                                                            <span>new</span>
+                                                                        </div>
+                                                                        <a href="{{product.get_absolute_url}}">
+                                                                            <img width="400" height="280" src="{{ product.image.url }}" alt="Product Title" />
+                                                                            <img class="secondary-image" alt="Product Title" src="{{product.image_2.url}}">
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="product-dsc">
+                                                                        <h3><a href="{{product.get_absolute_url}}">{{ product.name }}</a></h3>
+                                                                        <div class="star-price">
+                                                                            <span class="price-left">${{ product.price }}</span>
+                                                                            <span class="star-right">
+                                                                                <i class="fa fa-star"></i>
+                                                                                <i class="fa fa-star"></i>
+                                                                                <i class="fa fa-star"></i>
+                                                                                <i class="fa fa-star"></i>
+                                                                                <i class="fa fa-star-half-o"></i>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="actions-btn">
+                                                                        <a href="{% url "cart:cart_add" product.id %}" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                                </div>
+
+                                                <div role="tabpanel" class="tab-pane" id="profile">
+                                                <div class="row">
+                                                <div class="li-item">
+                                                    {% for product in search_result %}
+                                                        <div class="col-md-4 col-sm-4">
+                                                            <div class="tb-product-item-inner tb2 pct-last">
+                                                                <div class="re-img">
+                                                                    <a href="{{product.get_absolute_url}}"><img width="400" height="280" alt="" src="{{product.image.url}}"></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8 col-sm-8">
+                                                            <div class="f-fix">
+                                                                <div class="tb-beg">
+                                                                    <a href="{{product.get_absolute_url}}">{{product.name}}</a>
+                                                                </div>
+                                                                <div class="tb-product-wrap-price-rating">
+                                                                    <div class="tb-product-price font-noraure-3">
+                                                                        <span class="amount2 ana">${{product.price}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="desc">{{product.description}}</p>
+                                                                <div class="last-cart l-mrgn ns">
+                                                                    <a class="las4" href="{% url "cart:cart_add" product.id %}">Add To Cart</a>
+                                                                </div>
+    {#                                                            <div class="tb-product-btn">#}
+    {#                                                                <a href="#">#}
+    {#                                                                    <i class="fa fa-retweet"></i>#}
+    {#                                                                </a>#}
+    {#                                                            </div>#}
+                                                            </div>
+                                                        </div>
+                                                    {%endfor%}
+                                                </div>
+                                                </div>
+                                                </div>
+                                                </div>
+                                        {% else %}
+                                            <div class="tab-content">
+                                                <div role="tabpanel" class="tab-pane active" id="home">
+                                                    <div class="row">
+                                                        <div class="shop-tab">
+                                                            {% for product in products %}
+                                                                <!-- single-product start -->
+                                                                <div class="col-md-4 col-lg-4 col-sm-6">
+                                                                    <div class="single-product">
+                                                                        <div class="product-img">
+                                                                            <div class="pro-type">
+                                                                                <span>new</span>
+                                                                            </div>
+                                                                            <a href="{{product.get_absolute_url}}">
+                                                                                <img width="400" height="280" src="{{ product.image.url }}" alt="Product Title" />
+                                                                                <img class="secondary-image" alt="Product Title" src="{{product.image_2.url}}">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="product-dsc">
+                                                                            <h3><a href="{{product.get_absolute_url}}">{{ product.name }}</a></h3>
+                                                                            <div class="star-price">
+                                                                                <span class="price-left">${{ product.price }}</span>
+                                                                                <span class="star-right">
+                                                                                    <i class="fa fa-star"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                                    <i class="fa fa-star"></i>
+                                                                                    <i class="fa fa-star-half-o"></i>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="actions-btn">
+                                                                            <a href="{% url "cart:cart_add" product.id %}" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div role="tabpanel" class="tab-pane" id="profile">
+                                                <div class="row">
+                                                <div class="li-item">
+                                                    {% for product in products %}
+                                                        <div class="col-md-4 col-sm-4">
+                                                            <div class="tb-product-item-inner tb2 pct-last">
+                                                                <div class="re-img">
+                                                                    <a href="{{product.get_absolute_url}}"><img alt="" src="{{product.image.url}}"></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8 col-sm-8">
+                                                            <div class="f-fix">
+                                                                <div class="tb-beg">
+                                                                    <a href="{{product.get_absolute_url}}">{{product.name}}</a>
+                                                                </div>
+                                                                <div class="tb-product-wrap-price-rating">
+                                                                    <div class="tb-product-price font-noraure-3">
+                                                                        <span class="amount2 ana">${{product.price}}</span>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="desc">{{product.description}}</p>
+                                                                <div class="last-cart l-mrgn ns">
+                                                                    <a class="las4" href="{% url "cart:cart_add" product.id %}">Add To Cart</a>
+                                                                </div>
+    {#                                                            <div class="tb-product-btn">#}
+    {#                                                                <a href="#">#}
+    {#                                                                    <i class="fa fa-retweet"></i>#}
+    {#                                                                </a>#}
+    {#                                                            </div>#}
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                </div>
+                                                </div>
+                                                </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    <!-- shop-style  content section end -->
+{% endblock %}

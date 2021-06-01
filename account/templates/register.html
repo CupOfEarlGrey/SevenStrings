@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- pages-title-start -->
+    <section class="contact-img-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="con-text">
+                            <h2 class="page-title">Login</h2>
+                            <p><a href="/">Home</a> | Login</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- pages-title-end -->
+    <!-- login content section start -->
+    <div class="login-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-text-center center-block col-md-6">
+                        <div class="tb-login-form res">
+                            <h5 class="tb-title">Create a new account</h5>
+                            <p>Hello, Welcome your to account</p>
+                            <form action="#" method="post">
+                                <div>
+                                    {% csrf_token %}
+                                    {{ register_form }}
+                                </div>
+                                <p class="login-submit5 ress">
+                                    <input value="SignUp" class="button-primary" type="submit">
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- login  content section end -->
+{% endblock %}

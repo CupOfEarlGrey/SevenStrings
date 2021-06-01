@@ -1,0 +1,236 @@
+<!-- slider-section-start -->
+<section class="slider-main-area">
+                <div class="main-slider an-si">
+                    <div class="bend niceties preview-2 hm-ver-1">
+                        <div id="ensign-nivoslider-2" class="slides">
+                            <img src="../../static/img/slider/1.png" alt="" title="#slider-direction-3"  />
+                            <img src="../../static/img/slider/2.png" alt="" title="#slider-direction-1"  />
+                        </div>
+                        <!-- direction 1 -->
+                        <div id="slider-direction-3" class="t-cn slider-direction Builder">
+                            <div class="slide-all">
+                                <!-- layer 1 -->
+                                <div class="layer-1">
+                                    <h2 class="title5">new collection</h2>
+                                </div>
+                                <!-- layer 2 -->
+                                <div class="layer-2">
+                                    <h2 class="title6">Electric Guitars</h2>
+                                </div>
+                                <!-- layer 2 -->
+                                <div class="layer-2">
+                                    <p class="title0">Save Up To 40%</p>
+                                </div>
+                                <!-- layer 3 -->
+                                <div class="layer-3">
+                                    <a class="min1" href="{% url "main_seven_strings:shop" %}">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="slider-direction-1" class="t-cn slider-direction Builder">
+                            <div class="slide-all slide2">
+                                <!-- layer 1 -->
+                                <div class="layer-1">
+                                    <h2 class="title5">new collection</h2>
+                                </div>
+                                <!-- layer 2 -->
+                                <div class="layer-2">
+                                    <h2 class="title6">Acoustic Guitars</h2>
+                                </div>
+                                <!-- layer 2 -->
+                                <div class="layer-2">
+                                    <p class="title0">Save Up To 40% </p>
+                                </div>
+                                <!-- layer 3 -->
+                                <div class="layer-3">
+                                    <a class="min1" href="{% url "main_seven_strings:shop" %}">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+<!-- slider section end -->
+
+<!-- new-products section start -->
+<section class="featured-products single-products section-padding-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="section-title">
+                                <h3>FEATURED PRODUCTS</h3>
+                                <div class="section-icon">
+                                    <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="product-tab nav nav-tabs">
+                                <ul>
+                                    <li class="active"><a data-toggle="tab" href="#all">all shop</a></li>
+                                    <li><a data-toggle="tab" href="#electric">electric</a></li>
+                                    <li><a data-toggle="tab" href="#acoustic">acoustic</a></li>
+                                    <li><a data-toggle="tab" href="#accessories">accessories</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row tab-content">
+                        <div class="tab-pane  fade in active" id="all">
+                            <div id="tab-carousel-1" class="re-owl-carousel owl-carousel product-slider owl-theme">
+                                {% for product in products %}
+                                        <div class="col-xs-12">
+                                        <div class="single-product">
+                                            <div class="product-img">
+                                                <div class="pro-type">
+                                                    <span>new</span>
+                                                </div>
+                                                <a href="{{product.get_absolute_url}}">
+                                                    <img width="400" height="280" src= {{product.image.url}} alt=""/>
+                                                    <img class="secondary-image" alt="Product Title" src="{{product.image_2.url}}">
+                                                </a>
+                                            </div>
+                                            <div class="product-dsc">
+                                                <h3><a href="{{product.get_absolute_url}}">{{ product.name }}</a></h3>
+                                                <div class="star-price">
+                                                    <span class="price-left">${{ product.price }}</span>
+                                                    <span class="star-right">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-half-o"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="actions-btn">
+                                                <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Compare"><i class="fa fa-retweet"></i></a>
+                                                <a href="{% url "cart:cart_add" product.id %}" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                    <!-- single product end -->
+                            </div>
+                        </div>
+                        <!-- all shop product end -->
+                        <div class="tab-pane  fade in" id="electric">
+                            <div id="tab-carousel-1" class="re-owl-carousel owl-carousel product-slider owl-theme">
+                                {% for e_guitar in e_guitars %}
+                                    <div class="col-xs-12">
+                                        <div class="single-product">
+                                            <div class="product-img">
+                                                <div class="pro-type">
+                                                    <span>new</span>
+                                                </div>
+                                                <a href="{{e_guitar.get_absolute_url}}">
+                                                    <img width="400" height="280" src= '{{e_guitar.image.url}}' alt="Product Title" />
+                                                    <img class="secondary-image" alt="Product Title" src="{{e_guitar.image_2.url}}">
+                                                </a>
+                                            </div>
+                                            <div class="product-dsc">
+                                                <h3><a href="{{e_guitar.get_absolute_url}}">{{e_guitar.name}}</a></h3>
+                                                <div class="star-price">
+                                                    <span class="price-left">${{e_guitar.price}}</span>
+                                                    <span class="star-right">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-half-o"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="actions-btn">
+                                                <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Compare"><i class="fa fa-retweet"></i></a>
+                                                <a href="{% url "cart:cart_add" e_guitar.id %}" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- single product end -->
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- electric product end -->
+                        <div class="tab-pane  fade in" id="acoustic">
+                            <div id="tab-carousel-1" class="re-owl-carousel owl-carousel product-slider owl-theme">
+                                {% for a_guitar in a_guitars %}
+                                    <div class="col-xs-12">
+                                        <div class="single-product">
+                                            <div class="product-img">
+                                                <div class="pro-type">
+                                                    <span>new</span>
+                                                </div>
+                                                <a href="{{ a_guitar.get_absolute_url }}">
+                                                    <img width="400" height="280" src= '{{a_guitar.image.url}}' alt="Product Title" />
+                                                    <img class="secondary-image" alt="Product Title" src="{{a_guitar.image_2.url}}">
+                                                </a>
+                                            </div>
+                                            <div class="product-dsc">
+                                                <h3><a href="{{ a_guitar.get_absolute_url }}">{{ a_guitar.name }}</a></h3>
+                                                <div class="star-price">
+                                                    <span class="price-left">${{ a_guitar.price }}</span>
+                                                    <span class="star-right">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-half-o"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="actions-btn">
+                                                <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Compare"><i class="fa fa-retweet"></i></a>
+                                                <a href="{% url "cart:cart_add" a_guitar.id %}" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- single product end -->
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- acoustic product end -->
+                        <div class="tab-pane  fade in" id="accessories">
+                            <div id="tab-carousel-1" class="re-owl-carousel owl-carousel product-slider owl-theme">
+                                {% for accessory in accessories %}
+                                    <div class="col-xs-12">
+                                        <div class="single-product">
+                                            <div class="product-img">
+                                                <div class="pro-type">
+                                                    <span>new</span>
+                                                </div>
+                                                <a href="#">
+                                                    <img width="400" height="280" src= '{{ accessory.image.url}}' alt="Product Title" />
+                                                    <img class="secondary-image" alt="Product Title" src="{{accessory.image_2.url}}">
+                                                </a>
+                                            </div>
+                                            <div class="product-dsc">
+                                                <h3><a href="#">{{ accessory.name }}</a></h3>
+                                                <div class="star-price">
+                                                    <span class="price-left">${{ accessory.price }}</span>
+                                                    <span class="star-right">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-half-o"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="actions-btn">
+                                                <a title="" data-placement="top" data-toggle="tooltip" href="#" data-original-title="Compare"><i class="fa fa-retweet"></i></a>
+                                                <a href="{% url "cart:cart_add" accessory.id %}" data-toggle="tooltip" data-placement="top" title="Add To Cart"><i class="fa fa-shopping-cart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- single product end -->
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <!-- accessories product end -->
+                    </div>
+                </div>
+            </section>
+<!-- new-products section end -->

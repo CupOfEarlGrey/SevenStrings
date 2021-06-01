@@ -1,0 +1,358 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Seven Strings || Home </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- favicon
+		============================================ -->		
+        <link rel="shortcut icon" type="image/x-icon" href="/static/img/favicon.ico">
+		<!-- google fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Poppins:400,300,500,600,700' rel='stylesheet' type='text/css'>
+		<!-- all css here -->
+		<!-- bootstrap v3.3.6 css -->
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <!-- CSS only -->
+{#        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">#}
+		<!-- animate css -->
+        <link rel="stylesheet" href="/static/css/animate.css">
+		<!-- pe-icon-7-stroke -->
+		<link rel="stylesheet" href="/static/css/pe-icon-7-stroke.min.css">
+		<!-- jquery-ui.min css -->
+        <link rel="stylesheet" href="/static/css/jquery-ui.min.css">
+        <!-- Image Zoom CSS
+		============================================ -->
+        <link rel="stylesheet" href="/static/css/img-zoom/jquery.simpleLens.css">
+		<!-- meanmenu css -->
+        <link rel="stylesheet" href="/static/css/meanmenu.min.css">
+		<!-- nivo slider CSS
+		============================================ -->
+		<link rel="stylesheet" href="/static/lib/css/nivo-slider.css" type="text/css" />
+		<link rel="stylesheet" href="/static/lib/css/preview.css" type="text/css" media="screen" />
+		<!-- owl.carousel css -->
+        <link rel="stylesheet" href="/static/css/owl.carousel.css">
+		<!-- font-awesome css -->
+        <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+		<!-- style css -->
+		<link rel="stylesheet" href="/static/style.css">
+		<!-- responsive css -->
+        <link rel="stylesheet" href="/static/css/responsive.css">
+		<!-- modernizr css -->
+        <script src="/static/js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+            <!--[if lt IE 8]>
+                <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            <![endif]-->
+
+            <!-- header section start -->
+            <header>
+                <div class="header-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-4">
+                                <div class="left-header clearfix">
+                                    <ul>
+                                        <li><p><i class="fa fa-phone" aria-hidden="true"></i>(+880) 1910 000251</p></li>
+                                        <li class="hd-none"><p><i class="fa fa-clock-o" aria-hidden="true"></i>Mon-fri : 9:00-19:00</p></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-8">
+                                <div class="right-header">
+                                    <ul>
+                                        <li><a href="{% url "cart:cart_detail" %}"><i class="fa fa-shopping-cart"></i>My cart</a></li>
+                                        <li><a href="{% url "orders:order_checkout" %}"><i class="fa fa-usd"></i>Check out</a></li>
+                                        <li><a href="{% url "login" %}"><i class="fa fa-lock"></i>Login</a></li>
+                                        <li><a href="{% url "logout" %}"><i class="fa fa-lock"></i>Logout</a></li>
+                                        <li><a href="{% url "register" %}"><i class="fa fa-user"></i>Register</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-bottom header-bottom-one" id="sticky-menu">
+                    <div class="container relative">
+                        <div class="row">
+                            <div class="col-sm-2 col-md-2 col-xs-4">
+                                <div class="logo">
+                                    <a href="/"><img src="../../static/img/logo.png" alt="" /></a>
+                                </div>
+                            </div>
+                            <div class="col-sm-10 col-md-10 col-xs-8 static">
+                                <div class="all-manu-area">
+                                    <div class="mainmenu clearfix hidden-sm hidden-xs">
+                                        <nav>
+                                            <ul>
+                                                <li><a href="{% url "main_seven_strings:shop" %}">Shop</a></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="right-header re-right-header">
+                                        <ul>
+                                            <li class="re-icon tnm"><i class="fa fa-search" aria-hidden="true"></i>
+                                                <form method="get" id="searchform" action="{% url "main_seven_strings:shop" %}">
+                                                    {% csrf_token %}
+                                                    <input type="text" value="" name="search_request" id="ws" placeholder="Search product..." />
+                                                    <button type="submit"><i class="pe-7s-search"></i></button>
+                                                </form>
+                                            </li>
+                                            {% with total_items=cart|length %}
+                                                {% if cart|length > 0 %}
+                                                    <li><a href="{% url "cart:cart_detail" %}"><i class="fa fa-shopping-cart"></i><span class="color1">{{ total_items }}</span></a>
+                                                {% else %}
+                                                    <li><a href="{% url "cart:cart_detail" %}"><i class="fa fa-shopping-cart"></i><span class="color2">0</span></a>
+                                                {% endif %}
+                                                <ul class="drop-cart">
+                                            {% endwith %}
+                                                    <li>
+                                                        {% for item in cart %}
+                                                            <a href="{% url "cart:cart_detail" %}"><img src="{{ item.product.image.url }}" alt="" /></a>
+                                                            <div class="add-cart-text">
+                                                                <p><a href="{{item.product.get_absolute_url}}">{{item.product.name}}</a></p>
+                                                                <p>${{item.product.price}}</p>
+                                                            </div>
+                                                            <div class="pro-close">
+                                                                <i class="pe-7s-close"></i>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </li>
+                                                    <li class="total-amount clearfix">
+                                                        <span class="floatleft">total</span>
+                                                        <span class="floatright"><strong>= ${{cart.get_total_price }}</strong></span>
+                                                    </li>
+                                                    <li>
+                                                        <div class="goto text-center">
+                                                            <a href="{% url "cart:cart_detail" %}"><strong>Go to cart &nbsp;<i class="pe-7s-angle-right"></i></strong></a>
+                                                        </div>
+                                                    </li>
+                                                    <li class="checkout-btn text-center">
+                                                        <a href="{% url "orders:order_checkout" %}">Check out</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- header section end -->
+
+            {% block content %}
+            {% endblock %}
+
+
+            <!-- brand section start -->
+           <section class="section-padding-top">
+               <div class="brand-logo">
+                    <div class="barnd-bg">
+                        <div class="container">
+                            <div class="row text-center">
+                                <div id="brand-logo" class="re-owl-carousel21 owl-carousel product-slider owl-theme">
+                                    <div class="col-xs-12">
+                                        <div class="single-brand">
+                                            <a href="#"><img src="../../static/img/brand/1.png" alt="" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="single-brand">
+                                            <a href="#"><img src="../../static/img/brand/2.png" alt="" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="single-brand">
+                                            <a href="#"><img src="../../static/img/brand/3.png" alt="" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="single-brand">
+                                            <a href="#"><img src="../../static/img/brand/4.png" alt="" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="single-brand">
+                                            <a href="#"><img src="../../static/img/brand/5.png" alt="" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="single-brand">
+                                            <a href="#"><img src="../../static/img/brand/6.png" alt="" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="single-brand">
+                                            <a href="#"><img src="../../static/img/brand/1.png" alt="" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="single-brand">
+                                            <a href="#"><img src="../../static/img/brand/3.png" alt="" /></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </section>
+           <!-- brand section end -->
+           <!-- service section start -->
+           <section class="re-section-padding">
+                <div class="service section-padding">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="single-service">
+                                    <i class="pe-7s-plane"></i>
+                                    <h4>Free Shipping</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="single-service res-single">
+                                    <i class="pe-7s-headphones"></i>
+                                    <h4>Customer Support</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="single-service">
+                                    <i class="pe-7s-refresh"></i>
+                                    <h4>15 days money back</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           </section>
+           <!-- service section end -->
+            <!-- footer section start -->
+            <footer class="re-footer-section">
+                <!-- footer-top area start -->
+                <div class="footer-top section-padding-top">
+                    <div class="footer-dsc">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="single-text res-text">
+                                        <div class="footer-title">
+                                            <h4>Contact us</h4>
+                                            <hr class="dubble-border"/>
+                                        </div>
+                                        <div class="footer-text col-md-4">
+                                            <ul>
+                                                <li>
+                                                    <i class="pe-7s-map-marker"></i>
+                                                    <p>My Company, 45 Puffin Street 1245</p>
+                                                    <p class="rs">Poffinville France.</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="footer-text col-md-4">
+                                            <ul>
+                                                <li>
+                                                    <i class="pe-7s-call"></i>
+                                                    <p>+201 (987) 6641 053</p>
+                                                    <p>+202 (987) 6641 056</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="footer-text col-md-4">
+                                            <ul>
+                                                <li>
+                                                    <i class="pe-7s-mail-open"></i>
+                                                    <p>info@domainname.com</p>
+                                                    <p>company@outlook.com</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="dubble-border"/>
+                    </div>
+                    <div class="social-media">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="paypal social-icon">
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-cc-stripe"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="social-icon">
+                                        <ul class="floatright">
+                                            <li class="res-mar"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-soundcloud"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- footer-top area end -->
+                <!-- footer-bottom area start -->
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12 text-center">
+                                <p>&copy; 2016 Devitems. All Rights Reserved.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- footer-bottom area end -->
+            </footer>
+            <!-- footer section end -->
+
+            <!-- all js here -->
+            <!-- jquery latest version -->
+            <script src="/static/js/vendor/jquery-1.12.0.min.js"></script>
+            <!-- bootstrap js -->
+            <script src="/static/js/bootstrap.min.js"></script>
+            <!-- JavaScript Bundle with Popper -->
+{#            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>#}
+            <!-- parallax js -->
+            <script src="/static/js/parallax.min.js"></script>
+            <!-- owl.carousel js -->
+            <script src="/static/js/owl.carousel.min.js"></script>
+            <!-- Img Zoom js -->
+            <script src="/static/js/img-zoom/jquery.simpleLens.min.js"></script>
+            <!-- meanmenu js -->
+            <script src="/static/js/jquery.meanmenu.js"></script>
+            <!-- jquery.countdown js -->
+            <script src="/static/js/jquery.countdown.min.js"></script>
+            <!-- Nivo slider js
+            ============================================ -->
+            <script src="/static/lib/js/jquery.nivo.slider.js" type="text/javascript"></script>
+            <script src="/static/lib/home.js" type="text/javascript"></script>
+            <!-- jquery-ui js -->
+            <script src="/static/js/jquery-ui.min.js"></script>
+            <!-- sticky js -->
+            <script src="/static/js/sticky.js"></script>
+            <!-- plugins js -->
+            <script src="/static/js/plugins.js"></script>
+            <!-- main js -->
+            <script src="/static/js/main.js"></script>
+        </body>
+</html>
